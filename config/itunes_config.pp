@@ -3,7 +3,7 @@ class people::wbs75::config::itunes_config (
     $my_sourcedir = $people::wbs75::params::my_sourcedir,
     $my_username  = $people::wbs75::params::my_username
     ) {
-    
+
     ###################
     # iTunes Settings #
     ###################
