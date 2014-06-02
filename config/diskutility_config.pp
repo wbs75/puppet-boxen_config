@@ -18,7 +18,7 @@ class people::wbs75::config::diskutility_config (
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'advanced-image-options',
-        value    => true,
+        value   => true,
         value_type   => 'boolean',
     }
 
