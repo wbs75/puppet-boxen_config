@@ -7,7 +7,6 @@ class people::wbs75::config::global_config (
     ###################
     # Global Settings #
     ###################
-    
     #########################################################
     # Reboot is required for some of changes to take effect #
     #########################################################
