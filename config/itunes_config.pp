@@ -4,12 +4,6 @@ class people::wbs75::config::itunes_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
-    }
-
     ###################
     # iTunes Settings #
     ###################
