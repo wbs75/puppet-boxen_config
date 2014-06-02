@@ -10,17 +10,17 @@ class people::wbs75::config::dock_config (
 
     # Dock prefs only take effect when you restart the dock
     property_list_key { 'Hide the dock':
-        ensure     => present,
-        path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
-        key        => 'autohide',
+        ensure  => present,
+        path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
+        key     => 'autohide',
         value   => true,
-        value_type => 'boolean',
-        notify     => Exec['Restart the Dock'],
+        value_type  => 'boolean',
+        notify      => Exec['Restart the Dock'],
     }
 
     exec { 'Restart the Dock':
         command     => '/usr/bin/killall -HUP Dock',
-        refreshonly   => true,
+        refreshonly     => true,
     }
 
     property_list_key { 'Disable Mission Control':
