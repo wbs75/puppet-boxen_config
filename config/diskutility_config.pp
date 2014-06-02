@@ -10,9 +10,9 @@ class people::wbs75::config::diskutility_config (
         mode  => '0644',
     }
 
-    ###########
+    ################
     # Disk Utility #
-    ###########
+    ################
 
     property_list_key { 'advanced-image-options':
         ensure  => present,
@@ -78,4 +78,3 @@ class people::wbs75::config::diskutility_config (
         value_type => 'integer',
     }
 
-}
