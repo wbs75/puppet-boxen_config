@@ -8,36 +8,36 @@ class people::wbs75::config::itunes_config (
     # iTunes Settings #
     ###################
 
-    property_list_key { 'AutomaticDeviceBackupsDisabled':
+    property_list_key { 'Disable Automatic Device Backups':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'AutomaticDeviceBackupsDisabled',
-        value      => true,
-        value_type => 'boolean',
+        key => 'AutomaticDeviceBackupsDisabled',
+        value   => true,
+        value_type  => 'boolean',
     }
 
-    property_list_key { 'disableCheckForDeviceUpdates':
+    property_list_key { 'Disable Check For Device Updates':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'disableCheckForDeviceUpdates',
-        value      => true,
-        value_type => 'boolean',
+        key => 'disableCheckForDeviceUpdates',
+        value   => true,
+        value_type  => 'boolean',
     }
 
     property_list_key { 'disableGeniusSidebar':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'disableGeniusSidebar',
-        value      => true,
-        value_type => 'boolean',
+        key => 'disableGeniusSidebar',
+        value   => true,
+        value_type  => 'boolean',
     }
 
     property_list_key { 'disablePing':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'disablePing',
-        value      => true,
-        value_type => 'boolean',
+        key => 'disablePing',
+        value   => true,
+        value_type  => 'boolean',
     }
 
     property_list_key { 'disablePingSidebar':
