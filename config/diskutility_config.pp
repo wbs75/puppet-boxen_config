@@ -74,7 +74,7 @@ class people::wbs75::config::diskutility_config (
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUDebugMessageLevel',
-        value      => 4,
+        value      => '4',
         value_type => 'integer',
     }
 }
