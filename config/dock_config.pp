@@ -4,15 +4,15 @@ class people::wbs75::config::dock_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
-    #################
+    ##############
     # Dock Settings #
-    #################
+    ##############
 
     # Dock prefs only take effect when you restart the dock
     property_list_key { 'Hide the dock':
-        ensure  => present,
-        path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
-        key     => 'autohide',
+        ensure     => present,
+        path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
+        key        => 'autohide',
         value   => true,
         value_type => 'boolean',
         notify     => Exec['Restart the Dock'],
