@@ -3,7 +3,7 @@ class people::wbs75::config::diskutility_config (
     $my_sourcedir = $people::wbs75::params::my_sourcedir,
     $my_username  = $people::wbs75::params::my_username
     ) {
-
+    
     File {
         owner => $my_username,
         group => 'staff',
@@ -77,4 +77,4 @@ class people::wbs75::config::diskutility_config (
         value      => 4,
         value_type => 'integer',
     }
-
+}
