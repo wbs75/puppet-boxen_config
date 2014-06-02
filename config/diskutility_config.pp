@@ -14,7 +14,7 @@ class people::wbs75::config::diskutility_config (
     # Disk Utility #
     ################
 
-    property_list_key { 'advanced-image-options':
+    property_list_key { 'Show All Disk Formats':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'advanced-image-options',
@@ -22,7 +22,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DUAllowsDiskImagesAsRAIDs':
+    property_list_key { 'Allows Disk Images As RAIDs':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUAllowsDiskImagesAsRAIDs',
@@ -30,7 +30,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DUDebugMenuEnabled':
+    property_list_key { 'Add Debug Menu':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUDebugMenuEnabled',
@@ -38,7 +38,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DURestoreCanSkipVerify':
+    property_list_key { 'Restore Skip Verifification':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DURestoreCanSkipVerify',
@@ -46,7 +46,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DUShowDetailsInFirstAid':
+    property_list_key { 'Show Details In FirstAid':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUShowDetailsInFirstAid',
@@ -54,7 +54,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DUShowEveryPartition':
+    property_list_key { 'Show All Partitions':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUShowEveryPartition',
@@ -62,7 +62,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'internal-preferences-enabled':
+    property_list_key { 'Show Extra Preferences':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'internal-preferences-enabled',
@@ -70,7 +70,7 @@ class people::wbs75::config::diskutility_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'DUDebugMessageLevel':
+    property_list_key { 'Show all Debug Messages':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         key     => 'DUDebugMessageLevel',
