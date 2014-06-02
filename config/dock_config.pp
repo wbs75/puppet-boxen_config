@@ -13,7 +13,7 @@ class people::wbs75::config::dock_config (
         ensure     => present,
         path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key        => 'autohide',
-        value   => true,
+        value      => true,
         value_type => 'boolean',
         notify     => Exec['Restart the Dock'],
     }
