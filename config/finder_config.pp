@@ -4,15 +4,9 @@ class people::wbs75::config::finder_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
-    }
-
-    ###############
+    ###################
     # Finder Settings #
-    ###############
+    ###################
 
     include osx::finder::show_external_hard_drives_on_desktop
     include osx::finder::show_hard_drives_on_desktop
