@@ -21,7 +21,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'AppleEnableMenuBarTransparency',
         value   => false,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Enable Mouse Swipe Navigate With Scrolls':
@@ -29,7 +29,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'AppleEnableMouseSwipeNavigateWithScrolls',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Apple Highlight Color':
@@ -37,7 +37,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'AppleHighlightColor',
         value   => '1.000000 0.823500 0.505900',
-        value_type => 'string',
+        value_type  => 'string',
     }
 
     property_list_key { 'Side Bar Icon Size - Small':
@@ -45,7 +45,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'NSTableViewDefaultSizeMode',
         value   => 1,
-        value_type => 'integer',
+        value_type  => 'integer',
     }
 
     # To turn rounded corners off for all windows, amongst other things. Apps must be restarted.
@@ -54,7 +54,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'AppleUseCoreUI',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Check Spelling While Typing':
@@ -62,7 +62,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'CheckSpellingWhileTyping',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Disable Automatic Spelling Correction':
@@ -70,7 +70,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'WebAutomaticSpellingCorrectionEnabled',
         value   => false,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     # Warning: This feature is buggy! Requires a logout, 1GB of RAM, and only one video card. QuartzGL can boost performance if an application is hardware acceleration dependent.
@@ -79,7 +79,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'NSDisableAutomaticTermination',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     # Cause Quick Look to print log messages showing its activity, such as which generators it loads and which documents it requests previews and thumbnails for.
@@ -88,7 +88,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'QLEnableLogging',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Show All File Extensions':
@@ -96,7 +96,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'AppleShowAllExtensions',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Disable Resume system-wide':
@@ -104,7 +104,7 @@ class people::wbs75::config::global_config (
         path    => "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         key     => 'NSQuitAlwaysKeepsWindows',
         value   => false,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
 }
