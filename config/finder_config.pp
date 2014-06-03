@@ -17,7 +17,7 @@ class people::wbs75::config::finder_config (
     include osx::finder::show_hidden_files
     include osx::finder::enable_quicklook_text_selection
 
-    property_list_key { 'FXShowPosixPathInTitle':
+    property_list_key { 'Disable Show Posix Path In Title':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => '_FXShowPosixPathInTitle',
@@ -31,7 +31,7 @@ class people::wbs75::config::finder_config (
         refreshonly => true,
     }
 
-    property_list_key { 'AnimateWindowZoom':
+    property_list_key { 'Disable Animation WindowZoom':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'AnimateWindowZoom',
@@ -49,7 +49,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'DisableAllAnimations':
+    property_list_key { 'Disable All Animations':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'DisableAllAnimations',
@@ -58,7 +58,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'FXDisableFancyWindowTransition':
+    property_list_key { 'Disable Fancy Window Transition':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'FXDisableFancyWindowTransition',
@@ -67,7 +67,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'FXEnableExtensionChangeWarning':
+    property_list_key { 'Disable Extension Change Warning':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'FXEnableExtensionChangeWarning',
@@ -76,7 +76,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'LastTrashState':
+    property_list_key { 'Last Trash State':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'LastTrashState',
@@ -85,7 +85,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'NewWindowTargetIsHome-immutable':
+    property_list_key { 'New Window Target Is Home-immutable':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'NewWindowTargetIsHome-immutable',
@@ -94,7 +94,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'QLEnableSlowMotion':
+    property_list_key { 'Enable Quickview SlowMotion':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'QLEnableSlowMotion',
@@ -103,7 +103,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'QLEnableXRayFolders':
+    property_list_key { 'Enable XRay Folders':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'QLEnableXRayFolders',
@@ -112,7 +112,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'QuitMenuItem':
+    property_list_key { 'Enablr Quit Menu':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'QuitMenuItem',
@@ -121,7 +121,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'RestoreWindowState':
+    property_list_key { 'Restore Window State':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'RestoreWindowState',
@@ -130,7 +130,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'ShowCustomIconsForRemoteVolumes':
+    property_list_key { 'Show Custom Icons For Remote Volumes':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'ShowCustomIconsForRemoteVolumes',
@@ -139,7 +139,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'ShowCustomIconsForRemovableVolumes':
+    property_list_key { 'Show Custom Icons For Removable Volumes':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'ShowCustomIconsForRemovableVolumes',
@@ -148,7 +148,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'SidebarTagsSctionDisclosedState':
+    property_list_key { 'Sidebar Tags Section Closed':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'SidebarTagsSctionDisclosedState',
@@ -157,7 +157,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'WarnOnEmptyTrash':
+    property_list_key { 'Warn On Empty Trash':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'WarnOnEmptyTrash',
@@ -166,7 +166,7 @@ class people::wbs75::config::finder_config (
         notify     => Exec['Restart Finder'],
     }
 
-    property_list_key { 'FXPreferredViewStyle':
+    property_list_key { 'Preferred View Style':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         key     => 'FXPreferredViewStyle',
