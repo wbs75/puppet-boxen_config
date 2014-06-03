@@ -87,4 +87,5 @@ class people::wbs75::config::itunes_config (
         value   => true,
         value_type => 'boolean',
     }
+
 }
