@@ -14,10 +14,10 @@ class people::wbs75::config::system_config (
 
     # Disable Gatekeeper so you can install any package you want
     property_list_key { 'Disable Gatekeeper':
-        ensure => present,
-        path   => '/var/db/SystemPolicy-prefs.plist',
-        key    => 'enabled',
-        value  => 'no',
+        ensure  => present,
+        path    => '/var/db/SystemPolicy-prefs.plist',
+        key => 'enabled',
+        value   => 'no',
     }
 
     # Additional information to display on the login window.
