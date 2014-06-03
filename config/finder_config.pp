@@ -174,5 +174,4 @@ class people::wbs75::config::finder_config (
         value_type    => 'string',
         notify     => Exec['Restart Finder'],
     }
-
 }
