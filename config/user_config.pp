@@ -88,7 +88,7 @@ class people::wbs75::config::user_config (
         value_type  => 'string',
         notify  => Exec['Restart SystemUIServer'],
     }
-
+    
     file { "${my_homedir}/Library/Preferences/ByHost/com.apple.systemuiserver.000c291e1dc4.plist":
         ensure  => file,
         mode    => '0600',
