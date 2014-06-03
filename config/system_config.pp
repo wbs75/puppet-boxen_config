@@ -31,8 +31,7 @@ class people::wbs75::config::system_config (
             value_type  => 'string',
         }
     
-        # Disable Secure Virtual Memory
-        # Requires Restart
+        # Disable Secure Virtual Memory - Requires Restart 
         property_list_key { 'DisableEncryptedSwap':
             ensure  => present,
             path    => "/Library/Preferences/com.apple.virtualMemory.plist",
@@ -50,8 +49,7 @@ class people::wbs75::config::system_config (
             value_type  => 'boolean',
         }
     
-        # Disable Automatic Login
-        # Note: change value to "false" for Disable Automatic Login to work
+        # Disable Automatic Login - Note: change value to "false" for Disable Automatic Login to work
         property_list_key { 'Disabl Auto Login Client':
             ensure  => present,
             path    => "/Library/Preferences/com.apple.loginwindow.plist",
