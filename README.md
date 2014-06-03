@@ -1,4 +1,4 @@
 boxen_config
 ============
 
-random config.pp to use with boxen
+requires [puppet-property_list_key](https://github.com/glarizza/puppet-property_list_key)
