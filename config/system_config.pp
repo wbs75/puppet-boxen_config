@@ -75,5 +75,5 @@ class people::wbs75::config::system_config (
             value   => true,
             value_type  => 'boolean',
         }
-    
+        
 }
