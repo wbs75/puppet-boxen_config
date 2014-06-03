@@ -39,14 +39,6 @@ class people::wbs75::config::user_config (
         value_type  => 'boolean',
     }
 
-    property_list_key { 'Show Expired Certificates':
-        ensure  => present,
-        path    => "${my_homedir}/Library/Preferences/com.apple.keychainaccess.plist",
-        key => 'Show Expired Certificates',
-        value   => true,
-        value_type  => 'boolean',
-    }
-
     property_list_key { 'Distinguish Legacy ACLs':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.keychainaccess.plist",
