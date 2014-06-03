@@ -48,20 +48,20 @@ class people::wbs75::config::user_config (
     }
 
     property_list_key { 'Distinguish Legacy ACLs':
-        ensure     => present,
+        ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.keychainaccess.plist",
-        key     => 'Distinguish Legacy ACLs',
+        key => 'Distinguish Legacy ACLs',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     # Disable "Are you sure you want to open this?" Messages
     property_list_key { 'Disable "Are you sure you want to open this?" Messages':
-        ensure     => present,
-        path       => "${my_homedir}/Library/Preferences/com.apple.LaunchServices.plist",
-        key        => 'LSQuarantine',
-        value      => false,
-        value_type => 'boolean',
+        ensure  => present,
+        path    => "${my_homedir}/Library/Preferences/com.apple.LaunchServices.plist",
+        key => 'LSQuarantine',
+        value   => false,
+        value_type  => 'boolean',
     }
 
     # Restart SystemUIServer for ScreenShot changes to take effect. Shadows are not included in screenshots of individual windows
