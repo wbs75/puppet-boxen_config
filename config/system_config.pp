@@ -4,9 +4,11 @@ class people::wbs75::config::system_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
     
+    
     #################
     # System Config #
     #################
+    
     
     include osx::software_update
     include osx::disable_app_quarantine
