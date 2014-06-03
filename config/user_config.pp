@@ -13,7 +13,7 @@ class people::wbs75::config::user_config (
     ###############
     # User Config #
     ###############
-
+    
     include bash
     include bash::completion
 
@@ -25,26 +25,26 @@ class people::wbs75::config::user_config (
     property_list_key { 'Disable Dashboard':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dashboard.plist",
-        key     => 'mcx-disabled',
-        value      => true,
-        value_type => 'boolean',
+        key => 'mcx-disabled',
+        value   => true,
+        value_type  => 'boolean',
     }
 
     # Activate extra debugging features for Installer
     property_list_key { 'Enable Installer Debugging':
-        ensure     => present,
-        path       => "${my_homedir}/Library/Preferences/com.apple.installer.plist",
-        key        => 'defaults write com.apple.installer',
-        value      => true,
-        value_type => 'boolean',
+        ensure  => present,
+        path    => "${my_homedir}/Library/Preferences/com.apple.installer.plist",
+        key => 'defaults write com.apple.installer',
+        value   => true,
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Show Expired Certificates':
-        ensure     => present,
+        ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.keychainaccess.plist",
-        key     => 'Show Expired Certificates',
+        key => 'Show Expired Certificates',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Distinguish Legacy ACLs':
@@ -64,19 +64,18 @@ class people::wbs75::config::user_config (
         value_type => 'boolean',
     }
 
-    # Restart SystemUIServer for ScreenShot changes to take effect.
-    # Shadows are not included in screenshots of individual windows.
+    # Restart SystemUIServer for ScreenShot changes to take effect. Shadows are not included in screenshots of individual windows
     property_list_key { 'Disable Shadow':
-        ensure     => present,
-        path       => "${my_homedir}/Library/Preferences/com.apple.screencapture.plist",
-        key        => 'disable-shadow',
-        value      => true,
-        value_type => 'boolean',
-        notify     => Exec['Restart SystemUIServer'],
+        ensure  => present,
+        path    => "${my_homedir}/Library/Preferences/com.apple.screencapture.plist",
+        key => 'disable-shadow',
+        value   => true,
+        value_type  => 'boolean',
+        notify  => Exec['Restart SystemUIServer'],
     }
 
     exec { 'Restart SystemUIServer':
-        command     => '/usr/bin/killall -HUP SystemUIServer',
+        command => '/usr/bin/killall -HUP SystemUIServer',
         refreshonly => true,
     }
 
@@ -84,10 +83,10 @@ class people::wbs75::config::user_config (
     property_list_key { 'Screen Capture Format':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.screencapture.plist",
-        key     => 'type',
-        value      => 'jpg',
-        value_type => 'string',
-        notify     => Exec['Restart SystemUIServer'],
+        key => 'type',
+        value   => 'jpg',
+        value_type  => 'string',
+        notify  => Exec['Restart SystemUIServer'],
     }
 
     file { "${my_homedir}/Library/Preferences/ByHost/com.apple.systemuiserver.000c291e1dc4.plist":
@@ -99,24 +98,24 @@ class people::wbs75::config::user_config (
     property_list_key { 'disable Menubar Time Machine icon':
         ensure => present,
         path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
-        key    => 'dontAutoLoad',
+        key => 'dontAutoLoad',
         value  => '/System/Library/CoreServices/Menu Extras/TimeMachine.menu',
-        value_type => array,
+        value_type  => array,
     }
 
     property_list_key { 'disable Menubar Bluetooth icon':
         ensure => present,
         path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
-        key    => 'dontAutoLoad',
+        key => 'dontAutoLoad',
         value  => '/System/Library/CoreServices/Menu Extras/Bluetooth.menu',
-        value_type => array,
+        value_type  => array,
     }
 
     property_list_key { 'disable Menubar AirPort icon':
         ensure => present,
         path   => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
-        key    => 'dontAutoLoad',
+        key => 'dontAutoLoad',
         value  => '/System/Library/CoreServices/Menu Extras/AirPort.menu',
-        value_type => array,
+        value_type  => array,
     }
 }
