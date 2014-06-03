@@ -3,13 +3,7 @@ class people::wbs75::config::remotedesktop_config (
     $my_sourcedir = $people::wbs75::params::my_sourcedir,
     $my_username  = $people::wbs75::params::my_username
     ) {
-
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
-    }
-
+    
     ######################
     ### Remote Desktop ###
     ######################
