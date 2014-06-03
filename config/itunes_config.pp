@@ -24,7 +24,7 @@ class people::wbs75::config::itunes_config (
         value_type  => 'boolean',
     }
 
-    property_list_key { 'disableGeniusSidebar':
+    property_list_key { 'Disable Genius Sidebar':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
         key => 'disableGeniusSidebar',
@@ -32,7 +32,7 @@ class people::wbs75::config::itunes_config (
         value_type  => 'boolean',
     }
 
-    property_list_key { 'disablePing':
+    property_list_key { 'Disable Ping':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
         key => 'disablePing',
@@ -40,52 +40,51 @@ class people::wbs75::config::itunes_config (
         value_type  => 'boolean',
     }
 
-    property_list_key { 'disablePingSidebar':
+    property_list_key { 'Disable Ping Sidebar':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'disablePingSidebar',
-        value      => true,
+        key => 'disablePingSidebar',
+        value   => true,
         value_type => 'boolean',
     }
 
-    property_list_key { 'dontAutomaticallySyncIPods':
+    property_list_key { 'Do not Automatically Sync iOS Device':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'dontAutomaticallySyncIPods',
-        value      => true,
+        key => 'dontAutomaticallySyncIPods',
+        value   => true,
+        value_type  => 'boolean',
+    }
+
+    property_list_key { 'Hide Ping Dropdown':
+        ensure  => present,
+        path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
+        key => 'hide-ping-dropdown',
+        value   => true,
         value_type => 'boolean',
     }
 
-    property_list_key { 'hide-ping-dropdown':
+    property_list_key { 'Look For Shared Music':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'hide-ping-dropdown',
-        value      => true,
+        key => 'lookForSharedMusic',
+        value   => true,
         value_type => 'boolean',
     }
 
-    property_list_key { 'lookForSharedMusic':
+    property_list_key { 'Allow Title Resize Windows':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'lookForSharedMusic',
-        value      => true,
+        key => 'NSAllowNonTitledResizableWindows',
+        value   => true,
         value_type => 'boolean',
     }
 
-    property_list_key { 'NSAllowNonTitledResizableWindows':
+    property_list_key { 'Remember View For Settings':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'NSAllowNonTitledResizableWindows',
-        value      => true,
+        key => 'remember-view-settings-for-each-source',
+        value   => true,
         value_type => 'boolean',
     }
-
-    property_list_key { 'remember-view-settings-for-each-source':
-        ensure  => present,
-        path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key     => 'remember-view-settings-for-each-source',
-        value      => true,
-        value_type => 'boolean',
-    }
-
 }
