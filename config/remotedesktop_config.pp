@@ -13,7 +13,7 @@ class people::wbs75::config::remotedesktop_config (
         path    => "${my_homedir}/Library/Preferences/com.apple.RemoteDesktop.plist",
         key => 'DirectoryGroupLoginsEnabled',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Do Not Send System Keys':
@@ -21,7 +21,7 @@ class people::wbs75::config::remotedesktop_config (
         path    => "${my_homedir}/Library/Preferences/com.apple.RemoteDesktop.plist",
         key => 'DoNotSendSystemKeys',
         value   => true,
-        value_type => 'boolean',
+        value_type  => 'boolean',
     }
 
     property_list_key { 'Show Short User Name':
