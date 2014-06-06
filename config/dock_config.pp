@@ -4,23 +4,23 @@ class people::wbs75::config::dock_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
+    }
+
     #################
     # Dock Settings #
     #################
 
-    # Dock prefs only take effect when you restart the dock
-    property_list_key { 'Hide the dock':
-        ensure     => present,
-        path       => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
-        key        => 'autohide',
-        value   => true,
-        value_type => 'boolean',
-        notify     => Exec['Restart the Dock'],
-    }
+    exec { 'Restart the Dock': command => '/usr/bin/killall -HUP Dock', refreshonly   => true, }
 
-    exec { 'Restart the Dock':
-        command     => '/usr/bin/killall -HUP Dock',
-        refreshonly   => true,
+    file { '.Dock Plist':
+        ensure      => file,
+        require     => Property_list_key['Disable Mission Control', 'Launchanim', 'Dock Alignment', 'Magnification', 'Mineffect', 'Mod-count', 'Mouse-over-hilte-stack', 'No-bouncing', 'No-glass', 'Tilesize', 'Use-new-list-stack'],
+        path        =>"${my_homedir}/Library/Preferences/com.apple.dock.plist",
+        mode        =>'0600',
     }
 
     property_list_key { 'Disable Mission Control':
@@ -32,7 +32,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'launchanim':
+    property_list_key { 'Launchanim':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'launchanim',
@@ -41,7 +41,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'dock alignment':
+    property_list_key { 'Dock Alignment':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'pinning',
@@ -50,7 +50,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'magnification':
+    property_list_key { 'Magnification':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'magnification',
@@ -59,7 +59,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'mineffect':
+    property_list_key { 'Mineffect':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'mineffect',
@@ -68,7 +68,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'mod-count':
+    property_list_key { 'Mod-count':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'mod-count',
@@ -77,7 +77,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'mouse-over-hilte-stack':
+    property_list_key { 'Mouse-over-hilte-stack':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'mouse-over-hilte-stack',
@@ -86,7 +86,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'no-bouncing':
+    property_list_key { 'No-bouncing':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'no-bouncing',
@@ -95,7 +95,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'no-glass':
+    property_list_key { 'No-glass':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'no-glass',
@@ -104,7 +104,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'tilesize':
+    property_list_key { 'Tilesize':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'tilesize',
@@ -113,7 +113,7 @@ class people::wbs75::config::dock_config (
         notify     => Exec['Restart the Dock'],
     }
 
-    property_list_key { 'use-new-list-stack':
+    property_list_key { 'Use-new-list-stack':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         key     => 'use-new-list-stack',
