@@ -3,10 +3,17 @@ class people::wbs75::config::diskutility_config (
     $my_sourcedir = $people::wbs75::params::my_sourcedir,
     $my_username  = $people::wbs75::params::my_username
     ) {
-    
+
     ################
     # Disk Utility #
     ################
+
+    file { '.DiskUtility Plist':
+        ensure  => file,
+        require => Property_list_key['Show All Disk Formats', 'Allows Disk Images As RAIDs', 'Add Debug Menu', 'Restore Skip Verifification', 'Show Details In FirstAid', 'Show All Partitions', 'Show Extra Preferences', 'Show all Debug Messages'],
+        path    => "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
+        mode    => '0600',
+    }
 
     property_list_key { 'Show All Disk Formats':
         ensure  => present,
@@ -71,4 +78,11 @@ class people::wbs75::config::diskutility_config (
         value   => 4,
         value_type  => 'integer',
     }
+
+    File {
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
+    }
+
 }

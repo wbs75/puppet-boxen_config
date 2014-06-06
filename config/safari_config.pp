@@ -4,9 +4,22 @@ class people::wbs75::config::safari_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
+    }
+
     ##############
     ### Safari ###
     ##############
+
+    file { '.Safari Plist':
+        ensure  => file,
+        require => Property_list_key['Backspace Key Navigation Enabled', 'Downloads Clearing Policy', 'History Age In Days Limit', 'Home Page', 'Local File Restrictions Enabled', 'DNS Prefetching Enabled', 'Include Toolbar Redesign', 'Disable Top Sites', 'Enable Form Modification On Close', 'Disable Animated Images', 'Disable Animated Image Looping', 'Disable CoverFlow View In Bookmarks View', 'Use Encoding Detector', 'Include Fancy URL Completion List', 'Include Google Suggestions', 'Grammar Checking Enabled', 'Continuous Spell Checking Enabled', 'Disable Print Backgrounds'],
+        path    => "${my_homedir}/Library/Preferences/com.apple.Safari.plist",
+        mode    => '0600',
+    }
 
     property_list_key { 'Backspace Key Navigation Enabled':
         ensure  => present,
@@ -64,7 +77,7 @@ class people::wbs75::config::safari_config (
         value_type => 'boolean',
     }
 
-    property_list_key { 'Include Top Sites':
+    property_list_key { 'Disable Top Sites':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.Safari.plist",
         key     => 'DebugSafari4IncludeTopSites',
@@ -153,3 +166,4 @@ class people::wbs75::config::safari_config (
     }
 
 }
+

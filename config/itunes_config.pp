@@ -8,10 +8,17 @@ class people::wbs75::config::itunes_config (
     # iTunes Settings #
     ###################
 
+    file { '.Itunes Plist':
+        ensure  => file,
+        require => Property_list_key['Disable Automatic Device Backups', 'Disable Check For Device Updates', 'Disable Genius Sidebar', 'Disable Ping', 'Disable Ping Sidebar', 'Do not Automatically Sync iOS Device', 'Hide Ping Dropdown', 'Look For Shared Music', 'Allow Title Resize Windows', 'Remember View For Settings'],
+        path=>"${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
+        mode    => '0600',
+    }
+
     property_list_key { 'Disable Automatic Device Backups':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'AutomaticDeviceBackupsDisabled',
+        key     => 'AutomaticDeviceBackupsDisabled',
         value   => true,
         value_type  => 'boolean',
     }
@@ -19,7 +26,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Disable Check For Device Updates':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'disableCheckForDeviceUpdates',
+        key     => 'disableCheckForDeviceUpdates',
         value   => true,
         value_type  => 'boolean',
     }
@@ -27,7 +34,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Disable Genius Sidebar':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'disableGeniusSidebar',
+        key     => 'disableGeniusSidebar',
         value   => true,
         value_type  => 'boolean',
     }
@@ -35,7 +42,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Disable Ping':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'disablePing',
+        key     => 'disablePing',
         value   => true,
         value_type  => 'boolean',
     }
@@ -43,7 +50,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Disable Ping Sidebar':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'disablePingSidebar',
+        key     => 'disablePingSidebar',
         value   => true,
         value_type => 'boolean',
     }
@@ -51,7 +58,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Do not Automatically Sync iOS Device':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'dontAutomaticallySyncIPods',
+        key     => 'dontAutomaticallySyncIPods',
         value   => true,
         value_type  => 'boolean',
     }
@@ -59,7 +66,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Hide Ping Dropdown':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'hide-ping-dropdown',
+        key     => 'hide-ping-dropdown',
         value   => true,
         value_type => 'boolean',
     }
@@ -67,7 +74,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Look For Shared Music':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'lookForSharedMusic',
+        key     => 'lookForSharedMusic',
         value   => true,
         value_type => 'boolean',
     }
@@ -75,7 +82,7 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Allow Title Resize Windows':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'NSAllowNonTitledResizableWindows',
+        key     => 'NSAllowNonTitledResizableWindows',
         value   => true,
         value_type => 'boolean',
     }
@@ -83,9 +90,15 @@ class people::wbs75::config::itunes_config (
     property_list_key { 'Remember View For Settings':
         ensure  => present,
         path    => "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
-        key => 'remember-view-settings-for-each-source',
+        key     => 'remember-view-settings-for-each-source',
         value   => true,
         value_type => 'boolean',
+    }
+
+    File {
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
     }
 
 }
