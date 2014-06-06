@@ -4,6 +4,12 @@ class people::wbs75::config::system_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'admin',
+        mode  => '0600',
+    }
+
     #################
     # System Config #
     #################
@@ -11,6 +17,14 @@ class people::wbs75::config::system_config (
     include osx::software_update
     include osx::disable_app_quarantine
     include osx::no_network_dsstores
+
+    property_list_key { 'Disable Gatekeeper':
+        ensure => present,
+        path   => '/var/db/SystemPolicy-prefs.plist',
+        key    => 'enabled',
+        value  => 'no',
+
+    }
 
     file { '.Loginwindow Plist':
         ensure  => file,
@@ -77,11 +91,4 @@ class people::wbs75::config::system_config (
         value   => true,
         value_type  => 'boolean',
     }
-
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
-    }
-
 }

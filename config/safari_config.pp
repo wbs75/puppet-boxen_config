@@ -6,8 +6,8 @@ class people::wbs75::config::safari_config (
 
     File {
         owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
+        group => 'admin',
+        mode  => '0600',
     }
 
     ##############

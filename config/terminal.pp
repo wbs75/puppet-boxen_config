@@ -4,6 +4,11 @@ class people::wbs75::config::terminal_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'admin',
+        mode  => '0600',
+    }
 
     ###################
     # Terminal Config #
@@ -14,13 +19,6 @@ class people::wbs75::config::terminal_config (
         require => Property_list_key[],
         path    => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
         mode    => '0600',
-    }
-
-
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
     }
 
 }

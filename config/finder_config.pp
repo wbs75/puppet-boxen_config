@@ -4,6 +4,12 @@ class people::wbs75::config::finder_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'admin',
+        mode  => '0600',
+    }
+
     ###################
     # Finder Settings #
     ###################
@@ -181,11 +187,4 @@ class people::wbs75::config::finder_config (
         value_type  => 'boolean',
         notify      => Exec['Restart Finder'],
     }
-
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
-    }
-
 }

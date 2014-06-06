@@ -8,12 +8,35 @@ class people::wbs75::config::user_config (
     # User Config #
     ###############
 
+    File {
+        owner => $my_username,
+        group => 'admin',
+        mode  => '0600',
+    }
+
     include bash
     include bash::completion
 
-    git::config::global { 'user.email':
-        value  => 'wbs75@me.com'
-    }
+    git::config::global {
+        'user.name':
+            value => 'wbs';
+        'user.email':
+            value => 'wbs75@me.com';
+        'github.user':
+            value => 'wbs75';
+        'color.ui':
+            value => 'true';
+        'core.quotepath':
+            value => 'false';
+        'diff.tool':
+            value => 'opendiff';
+        'merge.tool':
+            value => 'opendiff';
+        'push.default':
+            value => 'simple';
+        'alias.amend':
+            value => 'commit --amend -C HEAD';
+  }
 
     file { '.Dashboard Plist':
         ensure  => file,
@@ -126,7 +149,7 @@ class people::wbs75::config::user_config (
 
     property_list_key { 'Disable Menubar Time Machine icon':
         ensure => present,
-        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
+        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.68296EB8-678A-5D6C-B437-F6710A922355.plist",
         key     => 'dontAutoLoad',
         value   => '/System/Library/CoreServices/Menu Extras/TimeMachine.menu',
         value_type  => array,
@@ -134,7 +157,7 @@ class people::wbs75::config::user_config (
 
     property_list_key { 'Disable Menubar Bluetooth icon':
         ensure => present,
-        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
+        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.68296EB8-678A-5D6C-B437-F6710A922355.plist",
         key     => 'dontAutoLoad',
         value   => '/System/Library/CoreServices/Menu Extras/Bluetooth.menu',
         value_type  => array,
@@ -142,15 +165,9 @@ class people::wbs75::config::user_config (
 
     property_list_key { 'Disable Menubar AirPort icon':
         ensure => present,
-        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.BCE23ED2-261F-5E00-951F-142662E2472E.plist",
+        path    => "${my_homedir}/Library/Preferences/ByHost/.GlobalPreferences.68296EB8-678A-5D6C-B437-F6710A922355.plist",
         key     => 'dontAutoLoad',
         value   => '/System/Library/CoreServices/Menu Extras/AirPort.menu',
         value_type  => array,
-    }
-
-    File {
-        owner => $my_username,
-        group => 'staff',
-        mode  => '0644',
     }
 }

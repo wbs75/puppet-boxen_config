@@ -4,6 +4,12 @@ class people::wbs75::config::global_config (
     $my_username  = $people::wbs75::params::my_username
     ) {
 
+    File {
+        owner => $my_username,
+        group => 'admin',
+        mode  => '0600',
+    }
+
     ###################
     # Global Settings #
     ###################
@@ -126,17 +132,5 @@ class people::wbs75::config::global_config (
             key     => 'FXEnableExtensionChangeWarning',
             value   => false,
             value_type  => 'boolean',
-            notify      => Exec['Restart Finder'],
-        }
-
-        exec { 'Restart Finder':
-            command         => '/usr/bin/killall -HUP Finder',
-            refreshonly     => true,
-        }
-
-        File {
-            owner => $my_username,
-            group => 'staff',
-            mode  => '0644',
         }
 }
