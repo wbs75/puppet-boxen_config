@@ -14,7 +14,10 @@ class people::wbs75::config::dock_config (
     # Dock Settings #
     #################
 
-    exec { 'Restart the Dock': command => '/usr/bin/killall -HUP Dock', refreshonly   => true, }
+    exec { 'Restart the Dock':
+        command => '/usr/bin/killall -HUP Dock',
+        refreshonly   => true,
+    }
 
     file { '.Dock Plist':
         ensure      => file,
