@@ -1,4 +1,4 @@
-boxen_config
+puppet-boxen_config
 ============
 
 Random config.pp for boxen.  You will need fix path's and remove "wbs75" and use your github user name.
