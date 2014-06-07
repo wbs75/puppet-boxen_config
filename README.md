@@ -5,4 +5,4 @@ Random config.pp for boxen.  You will need fix path's and remove "wbs75" and use
 
 #### Required Puppet Modules:
 
-[puppet-property_list_key](https://github.com/glarizza/puppet-property_list_key)
+[glarizza/puppet-property_list_key](https://github.com/glarizza/puppet-property_list_key)
