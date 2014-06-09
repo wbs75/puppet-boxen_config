@@ -8,9 +8,6 @@ class people::wbs75::config::user_config (
     # User Config #
     ###############
 
-    include bash
-    include bash::completion
-
     git::config::global {
         'user.name':
             value => 'wbs';
@@ -45,6 +42,7 @@ class people::wbs75::config::user_config (
         key         => 'mcx-disabled',
         value       => true,
         value_type  => 'boolean',
+        notify      => Exec['Restart User Docks'],
     }
 
     # Activate extra debugging features for Installer
@@ -97,12 +95,7 @@ class people::wbs75::config::user_config (
         key         => 'disable-shadow',
         value       => true,
         value_type  => 'boolean',
-        notify      => Exec['Restart SystemUIServer'],
-    }
-
-    exec { 'Restart SystemUIServer':
-        command     => '/usr/bin/killall -HUP SystemUIServer',
-        refreshonly => true,
+        # notify      => Exec['Restart SystemUIServer'],
     }
 
     # The format in which screen captures are taken using hot keys (ie. Command-Shift-3, Command-Shift-4, etc.).
@@ -112,7 +105,7 @@ class people::wbs75::config::user_config (
         key         => 'type',
         value       => 'jpg',
         value_type  => 'string',
-        notify      => Exec['Restart SystemUIServer'],
+        # notify      => Exec['Restart SystemUIServer'],
     }
 
     property_list_key { 'Disable Menubar Time Machine icon':
@@ -147,6 +140,21 @@ class people::wbs75::config::user_config (
         value       => true,
         value_type  => 'boolean',
     }
+
+    exec { 'Restart User Finder':
+        command         => '/usr/bin/killall Finder',
+        refreshonly     => true,
+    }
+
+    exec { 'Restart User Docks':
+        command         => '/usr/bin/killall Finder',
+        refreshonly     => true,
+    }
+
+    # xec { 'Restart SystemUIServer':
+    #     command     => '/usr/bin/killall SystemUIServer',
+    #     refreshonly => true,
+    # }
 
     file { 'Dashboard Plist':
         ensure  => file,

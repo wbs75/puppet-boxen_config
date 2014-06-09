@@ -96,7 +96,7 @@ class people::wbs75::config::dock_config (
     }
 
     exec { 'Restart the Dock':
-        command         => '/usr/bin/killall -HUP Dock',
+        command         => '/usr/bin/killall Dock',
         refreshonly     => true,
     }
 

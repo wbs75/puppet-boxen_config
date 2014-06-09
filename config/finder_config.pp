@@ -29,6 +29,7 @@ class people::wbs75::config::finder_config (
         key         =>  '_FXShowPosixPathInTitle',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Disable Animation WindowZoom':
@@ -37,6 +38,7 @@ class people::wbs75::config::finder_config (
         key         =>  'AnimateWindowZoom',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Enable Cut':
@@ -45,6 +47,7 @@ class people::wbs75::config::finder_config (
         key         =>  'AllowCutForItems',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Disable All Animations':
@@ -53,6 +56,7 @@ class people::wbs75::config::finder_config (
         key         =>  'DisableAllAnimations',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Disable Fancy Window Transition':
@@ -61,6 +65,7 @@ class people::wbs75::config::finder_config (
         key         =>  'FXDisableFancyWindowTransition',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Disable Extension Change Warning':
@@ -69,6 +74,7 @@ class people::wbs75::config::finder_config (
         key         =>  'FXEnableExtensionChangeWarning',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Enable Quickview SlowMotion':
@@ -77,6 +83,7 @@ class people::wbs75::config::finder_config (
         key         =>  'QLEnableSlowMotion',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Enable XRay Folders':
@@ -85,6 +92,7 @@ class people::wbs75::config::finder_config (
         key         =>  'QLEnableXRayFolders',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Enable Quit Menu':
@@ -93,6 +101,7 @@ class people::wbs75::config::finder_config (
         key         =>  'QuitMenuItem',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Restore Window State':
@@ -101,6 +110,7 @@ class people::wbs75::config::finder_config (
         key         =>  'RestoreWindowState',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Show Custom Icons For Remote Volumes':
@@ -109,6 +119,7 @@ class people::wbs75::config::finder_config (
         key         =>  'ShowCustomIconsForRemoteVolumes',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Show Custom Icons For Removable Volumes':
@@ -117,6 +128,7 @@ class people::wbs75::config::finder_config (
         key         =>  'ShowCustomIconsForRemovableVolumes',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Sidebar Tags Section Closed':
@@ -125,6 +137,7 @@ class people::wbs75::config::finder_config (
         key         =>  'SidebarTagsSctionDisclosedState',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Warn On Empty Trash':
@@ -133,6 +146,7 @@ class people::wbs75::config::finder_config (
         key         =>  'WarnOnEmptyTrash',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Preferred View Style':
@@ -141,6 +155,7 @@ class people::wbs75::config::finder_config (
         key         =>  'FXPreferredViewStyle',
         value       =>  'clmv',
         value_type  =>  'string',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Desktop View Settings, Arranged By':
@@ -149,6 +164,7 @@ class people::wbs75::config::finder_config (
         key         =>  'arrangeBy',
         value       =>  'kind',
         value_type  =>  'string',
+        notify      =>  Exec['Restart Finder'],
     }
 
     property_list_key { 'Show Icon Preview':
@@ -161,7 +177,7 @@ class people::wbs75::config::finder_config (
     }
 
     exec { 'Restart Finder':
-        command         => '/usr/bin/killall -HUP Finder',
+        command         => '/usr/bin/killall Finder',
         refreshonly     => true,
     }
 

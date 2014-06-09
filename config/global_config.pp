@@ -50,6 +50,7 @@ class people::wbs75::config::global_config (
         key         =>  'AppleHighlightColor',
         value       =>  '1.000000 0.823500 0.505900',
         value_type  =>  'string',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Side Bar Icon Size - Small':
@@ -58,6 +59,7 @@ class people::wbs75::config::global_config (
         key         =>  'NSTableViewDefaultSizeMode',
         value       =>  1,
         value_type  =>  'integer',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     # To turn rounded corners off for all windows, amongst other things. Apps must be restarted.
@@ -67,6 +69,7 @@ class people::wbs75::config::global_config (
         key         =>  'AppleUseCoreUI',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Check Spelling While Typing':
@@ -85,7 +88,6 @@ class people::wbs75::config::global_config (
         value_type  =>  'boolean',
     }
 
-    # Warning: This feature is buggy! Requires a logout, 1GB of RAM, and only one video card. QuartzGL can boost performance if an application is hardware acceleration dependent.
     property_list_key { 'Automatic Termination':
         ensure      =>  present,
         path        =>  "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
@@ -101,6 +103,7 @@ class people::wbs75::config::global_config (
         key         =>  'QLEnableLogging',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Show All File Extensions':
@@ -109,6 +112,7 @@ class people::wbs75::config::global_config (
         key         =>  'AppleShowAllExtensions',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Disable Resume system-wide':
@@ -117,6 +121,7 @@ class people::wbs75::config::global_config (
         key         =>  'NSQuitAlwaysKeepsWindows',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Enable Extension Change Warning':
@@ -125,6 +130,12 @@ class people::wbs75::config::global_config (
         key         =>  'FXEnableExtensionChangeWarning',
         value       =>  false,
         value_type  =>  'boolean',
+        notify      =>  Exec['Restart Global Finder'],
+    }
+
+    exec { 'Restart Global Finder':
+        command         => '/usr/bin/killall Finder',
+        refreshonly     => true,
     }
 
     file { 'Global Plist':
