@@ -15,7 +15,7 @@ class people::wbs75::config::system_config (
 
     File {
       owner =>  $my_username,
-      group => 'staff',
+      group => 'admin',
       mode  => '0644',
     }
 
@@ -39,7 +39,7 @@ class people::wbs75::config::system_config (
     # Additional information to display on the login window
     property_list_key { 'Admin Host Info':
         ensure      =>  present,
-        path        =>  "/Library/Preferences/com.apple.loginwindow.plist",
+        path        =>  "${my_homedir}/Library/Preferences/com.apple.loginwindow.plist",
         key         =>  'AdminHostInfo',
         value       =>  'HostName',
         value_type  =>  'string',
@@ -48,15 +48,15 @@ class people::wbs75::config::system_config (
     # Disable Automatic Login - Note: change value to "false" for Disable Automatic Login to work
     property_list_key { 'Disable Auto Login Client':
         ensure      =>  present,
-        path        =>  "/Library/Preferences/com.apple.loginwindow.plist",
+        path        =>  "${my_homedir}/Library/Preferences/com.apple.loginwindow.plist",
         key         =>  'com.apple.login.mcx.DisableAutoLoginClient',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Default Read Loginwindow Plist'],
+        notify      =>   Exec['Defaults Read Loginwindow Plist'],
     }
 
     exec { 'Defaults Read Loginwindow Plist':
-        command     => "defaults read /Library/Preferences/com.apple.loginwindow.plist",
+        command     => "defaults read ${my_homedir}/Library/Preferences/com.apple.loginwindow.plist",
         path        =>  "/usr/bin/",
     }
 

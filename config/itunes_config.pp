@@ -110,7 +110,7 @@ class people::wbs75::config::itunes_config (
                         ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
         mode        =>  '0600',
-        notify      =>  Exec['Default Read iTunes Plist'],
+        notify      =>  Exec['Defaults Read iTunes Plist'],
     }
 
     exec { 'Defaults Read iTunes Plist':

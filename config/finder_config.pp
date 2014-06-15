@@ -182,7 +182,7 @@ class people::wbs75::config::finder_config (
         path    =>  "${my_homedir}/Library/Preferences/com.apple.finder.plist",
         mode    =>  '0600',
         notify      =>  [
-                            Exec['Defaults Read Finder Plist'], ->
+                            Exec['Defaults Read Finder Plist'],
                             Exec['Restart the User_Config Finder'],
                         ],
     }

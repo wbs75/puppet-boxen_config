@@ -101,10 +101,8 @@ class people::wbs75::config::dock_config (
                         ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         mode        =>  '0600',
-        notify      =>  [
-                            Exec['Defaults Read Dock Plist'], ->
-                            Exec['Restart the Dock'],
-                        ],
+        notify      =>  Exec['Defaults Read Dock Plist'],
+                        
     }
 
     exec { 'Defaults Read Dock Plist':
