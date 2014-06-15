@@ -23,6 +23,14 @@ class people::wbs75::config::finder_config (
     include osx::finder::show_hidden_files
     include osx::finder::enable_quicklook_text_selection
 
+    property_list_key { 'Animate Window Zoom':
+        ensure      =>  present,
+        path        =>  "${my_homedir}/Library/Preferences/com.apple.finder.plist",
+        key         =>  'AnimateWindowZoom',
+        value       =>  false,
+        value_type  =>  'boolean',
+    }
+
     property_list_key { 'Disable Show Posix Path In Title':
         ensure      =>  present,
         path        =>  "${my_homedir}/Library/Preferences/com.apple.finder.plist",
@@ -159,12 +167,22 @@ class people::wbs75::config::finder_config (
         value_type  =>  'boolean',
     }
 
+    property_list_key { 'Animate Window Zoom':
+        ensure      =>  present,
+        path        =>  "${my_homedir}/Library/Preferences/com.apple.finder.plist",
+        key         =>  'AnimateWindowZoom',
+        value       =>  false,
+        value_type  =>  'boolean',
+    }
+
     file { 'Finder Plist':
         ensure  => file,
         require => [
+                        Property_list_key['Animate Window Zoom'],
                         Property_list_key['Disable Show Posix Path In Title'],
                         Property_list_key['Disable Animation WindowZoom'],
-                        Property_list_key['Enable Cut', 'Disable All Animations'],
+                        Property_list_key['Enable Cut'],
+                        Property_list_key['Disable All Animations'],
                         Property_list_key['Disable Fancy Window Transition'],
                         Property_list_key['Disable Extension Change Warning'],
                         Property_list_key['Enable Quickview SlowMotion'],
