@@ -22,6 +22,38 @@ class people::wbs75::config::terminal_config (
         value_type  => 'string',
     }
 
+    property_list_key { 'Default Profiles Version':
+        ensure      => present,
+        path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
+        key         => 'DefaultProfilesVersion',
+        value       =>  1,
+        value_type  => 'integer',
+    }
+
+    property_list_key { 'Focus Follows Mouse':
+        ensure      => present,
+        path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
+        key         => 'FocusFollowsMouse',
+        value       => 'true',
+        value_type  => 'boolean',
+    }
+
+    property_list_key { 'Option Click To Move Cursor':
+        ensure      => present,
+        path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
+        key         => 'OptionClickToMoveCursor',
+        value       => 'true',
+        value_type  => 'boolean',
+    }
+
+    property_list_key { 'Has Migrated Defaults':
+        ensure      => present,
+        path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
+        key         => 'HasMigratedDefaults',
+        value       => 'true',
+        value_type  => 'boolean',
+    }
+
     property_list_key { 'Startup Window Settings':
         ensure      => present,
         path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
@@ -57,6 +89,10 @@ class people::wbs75::config::terminal_config (
     file { 'Terminal Plist':
         ensure      => file,
         require     =>  [
+                            Property_list_key['Option Click To Move Cursor'],
+                            Property_list_key['Focus Follows Mouse'],
+                            Property_list_key['Default Profiles Version'],
+                            Property_list_key['Has Migrated Defaults'],
                             Property_list_key['Default Window Settings'],
                             Property_list_key['Default Profiles Version'],
                             Property_list_key['Secure Keyboard Entry'],
