@@ -9,9 +9,9 @@ class people::wbs75::config::itunes_config (
     ###################
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+      owner => $my_username,
+      group => 'staff',
+      mode  => '0644',
     }
 
     property_list_key { 'Disable Automatic Device Backups':
@@ -96,9 +96,26 @@ class people::wbs75::config::itunes_config (
 
     file { 'Itunes Plist':
         ensure      =>  file,
-        require     =>  Property_list_key['Disable Automatic Device Backups', 'Disable Check For Device Updates', 'Disable Genius Sidebar', 'Disable Ping', 'Disable Ping Sidebar', 'Do not Automatically Sync iOS Device', 'Hide Ping Dropdown', 'Look For Shared Music', 'Allow Title Resize Windows', 'Remember View For Settings'],
+        require     =>  [
+                            Property_list_key['Disable Automatic Device Backups'],
+                            Property_list_key['Disable Check For Device Updates'],
+                            Property_list_key['Disable Genius Sidebar'],
+                            Property_list_key['Disable Ping'],
+                            Property_list_key['Disable Ping Sidebar'],
+                            Property_list_key['Do not Automatically Sync iOS Device'],
+                            Property_list_key['Hide Ping Dropdown'],
+                            Property_list_key['Look For Shared Music'],
+                            Property_list_key['Allow Title Resize Windows'],
+                            Property_list_key['Remember View For Settings'],
+                        ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
         mode        =>  '0600',
+        notify      =>  Exec['Default Read iTunes Plist'],
+    }
+
+    exec { 'Defaults Read iTunes Plist':
+        command     => "defaults read ${my_homedir}/Library/Preferences/com.apple.iTunes.plist",
+        path        =>  "/usr/bin/",
     }
 
 }

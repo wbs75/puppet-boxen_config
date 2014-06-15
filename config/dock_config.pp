@@ -9,9 +9,9 @@ class people::wbs75::config::dock_config (
     #################
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+      owner => $my_username,
+      group => 'staff',
+      mode  => '0644',
     }
 
     property_list_key { 'Disable Mission Control':
@@ -20,7 +20,6 @@ class people::wbs75::config::dock_config (
         key         =>  'mcx-expose-disabled',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Launchanim':
@@ -29,7 +28,6 @@ class people::wbs75::config::dock_config (
         key         =>  'launchanim',
         value       =>  false,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Dock Alignment':
@@ -38,7 +36,6 @@ class people::wbs75::config::dock_config (
         key         =>  'pinning',
         value       =>  'middle',
         value_type  =>  'string',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Magnification':
@@ -47,7 +44,6 @@ class people::wbs75::config::dock_config (
         key         =>  'magnification',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Mineffect':
@@ -56,7 +52,6 @@ class people::wbs75::config::dock_config (
         key         =>  'mineffect',
         value       =>  'scale',
         value_type  =>  'string',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Mouse-over-hilte-stack':
@@ -65,7 +60,6 @@ class people::wbs75::config::dock_config (
         key         =>  'mouse-over-hilte-stack',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'No-bouncing':
@@ -74,7 +68,6 @@ class people::wbs75::config::dock_config (
         key         =>  'no-bouncing',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'No-glass':
@@ -83,7 +76,6 @@ class people::wbs75::config::dock_config (
         key         =>  'no-glass',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>   Exec['Restart the Dock'],
     }
 
     property_list_key { 'Use-new-list-stack':
@@ -92,19 +84,37 @@ class people::wbs75::config::dock_config (
         key         =>  'use-new-list-stack',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart the Dock'],
-    }
-
-    exec { 'Restart the Dock':
-        command         => '/usr/bin/killall Dock',
-        refreshonly     => true,
     }
 
     file { 'Dock Plist':
         ensure      =>  file,
-        require     =>  Property_list_key['Disable Mission Control', 'Launchanim', 'Dock Alignment', 'Magnification', 'Mineffect', 'Mouse-over-hilte-stack', 'No-bouncing', 'No-glass', 'Use-new-list-stack'],
+        require     =>  [
+                            Property_list_key['Disable Mission Control'],
+                            Property_list_key['Launchanim'],
+                            Property_list_key['Dock Alignment'],
+                            Property_list_key['Magnification'],
+                            Property_list_key['Mineffect'],
+                            Property_list_key['Mouse-over-hilte-stack'],
+                            Property_list_key['No-bouncing'],
+                            Property_list_key['No-glass'],
+                            Property_list_key['Use-new-list-stack'],
+                        ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.dock.plist",
         mode        =>  '0600',
+        notify      =>  [
+                            Exec['Defaults Read Dock Plist'], ->
+                            Exec['Restart the Dock'],
+                        ],
+    }
+
+    exec { 'Defaults Read Dock Plist':
+        user        => "${my_username}",
+        command     => '/usr/bin/defaults read ~/Library/Preferences/com.apple.dock.plist',
+    }
+
+    exec { 'Restart the Dock':
+        command     => '/usr/bin/killall -HUP Dock',
+        refreshonly => true,
     }
 
 }

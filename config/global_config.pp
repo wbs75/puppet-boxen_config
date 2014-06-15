@@ -2,7 +2,7 @@ class people::wbs75::config::global_config (
     $my_homedir   = $people::wbs75::params::my_homedir,
     $my_sourcedir = $people::wbs75::params::my_sourcedir,
     $my_username  = $people::wbs75::params::my_username
-    ) {
+    ){
 
     ###################
     # Global Settings #
@@ -11,14 +11,15 @@ class people::wbs75::config::global_config (
     # Reboot is required for some of changes to take effect #
     #########################################################
 
+    File {
+      owner =>  $my_username,
+      group =>  'staff',
+      mode  =>  '0644',
+    }
+
     include osx::global::enable_standard_function_keys
     include osx::global::disable_remote_control_ir_receiver
 
-    File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
-    }
 
     property_list_key { 'Disable Ducking Autocorrect':
         ensure      =>  present,
@@ -50,7 +51,6 @@ class people::wbs75::config::global_config (
         key         =>  'AppleHighlightColor',
         value       =>  '1.000000 0.823500 0.505900',
         value_type  =>  'string',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Side Bar Icon Size - Small':
@@ -59,7 +59,6 @@ class people::wbs75::config::global_config (
         key         =>  'NSTableViewDefaultSizeMode',
         value       =>  1,
         value_type  =>  'integer',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     # To turn rounded corners off for all windows, amongst other things. Apps must be restarted.
@@ -69,7 +68,6 @@ class people::wbs75::config::global_config (
         key         =>  'AppleUseCoreUI',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Check Spelling While Typing':
@@ -103,7 +101,6 @@ class people::wbs75::config::global_config (
         key         =>  'QLEnableLogging',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Show All File Extensions':
@@ -112,7 +109,6 @@ class people::wbs75::config::global_config (
         key         =>  'AppleShowAllExtensions',
         value       =>  true,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Disable Resume system-wide':
@@ -121,7 +117,6 @@ class people::wbs75::config::global_config (
         key         =>  'NSQuitAlwaysKeepsWindows',
         value       =>  false,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart Global Finder'],
     }
 
     property_list_key { 'Enable Extension Change Warning':
@@ -130,19 +125,33 @@ class people::wbs75::config::global_config (
         key         =>  'FXEnableExtensionChangeWarning',
         value       =>  false,
         value_type  =>  'boolean',
-        notify      =>  Exec['Restart Global Finder'],
-    }
-
-    exec { 'Restart Global Finder':
-        command         => '/usr/bin/killall Finder',
-        refreshonly     => true,
     }
 
     file { 'Global Plist':
         ensure      =>  file,
-        require     =>  Property_list_key['Enable MenuBar Transparency', 'Enable Mouse Swipe Navigate With Scrolls', 'Apple Highlight Color', 'Side Bar Icon Size - Small', 'Apple Use Core UI', 'Apple Use Core UI', 'Check Spelling While Typing', 'Disable Automatic Spelling Correction', 'Automatic Termination', 'Quick Look Debugging', 'Show All File Extensions', 'Disable Resume system-wide', 'Enable Extension Change Warning'],
+        require     =>  [
+                            Property_list_key['Disable Ducking Autocorrect'],
+                            Property_list_key['Enable MenuBar Transparency'],
+                            Property_list_key['Enable Mouse Swipe Navigate With Scrolls'],
+                            Property_list_key['Apple Highlight Color'],
+                            Property_list_key['Side Bar Icon Size - Small'],
+                            Property_list_key['Apple Use Core UI'],
+                            Property_list_key['Check Spelling While Typing'],
+                            Property_list_key['Disable Automatic Spelling Correction'],
+                            Property_list_key['Automatic Termination'],
+                            Property_list_key['Quick Look Debugging'],
+                            Property_list_key['Show All File Extensions'],
+                            Property_list_key['Disable Resume system-wide'],
+                            Property_list_key['Enable Extension Change Warning'],
+                        ],
         path        =>  "${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
         mode        =>  '0600',
+        notify      =>  Exec['Defaults Read .GlobalPreferences Plist'],
+    }
+
+    exec { 'Defaults Read .GlobalPreferences Plist':
+        command     => "defaults read ${my_homedir}/Library/Preferences/.GlobalPreferences.plist",
+        path        =>  "/usr/bin/",
     }
 
 }

@@ -8,22 +8,33 @@ class people::wbs75::config::system_config (
     # System Config #
     #################
 
+
     include osx::software_update
     include osx::disable_app_quarantine
     include osx::no_network_dsstores
 
-    property_list_key { 'Disable Gatekeeper':
-        ensure => present,
-        path   => '/var/db/SystemPolicy-prefs.plist',
-        key    => 'enabled',
-        value  => 'no',
+    File {
+      owner =>  $my_username,
+      group => 'staff',
+      mode  => '0644',
     }
 
-    File {
-        owner => 'root',
-        group => 'wheel',
-        mode  => '0644',
+########################################################################################
+
+    property_list_key { 'Disable Gatekeeper':
+        ensure  =>  present,
+        path    =>  '/var/db/SystemPolicy-prefs.plist',
+        key     =>  'enabled',
+        value   =>  'no',
+        notify  =>   Exec['Defaults Disable Gatekeeper Plist'],
     }
+
+    exec { 'Defaults Disable Gatekeeper Plist':
+        command     => "defaults read /var/db/SystemPolicy-prefs.plist",
+        path        =>  "/usr/bin/",
+    }
+
+########################################################################################
 
     # Additional information to display on the login window
     property_list_key { 'Admin Host Info':
@@ -41,7 +52,16 @@ class people::wbs75::config::system_config (
         key         =>  'com.apple.login.mcx.DisableAutoLoginClient',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>   Exec['Default Read Loginwindow Plist'],
     }
+
+    exec { 'Defaults Read Loginwindow Plist':
+        command     => "defaults read /Library/Preferences/com.apple.loginwindow.plist",
+        path        =>  "/usr/bin/",
+    }
+
+
+########################################################################################
 
     # Disable Secure Virtual Memory - Requires Restart
     property_list_key { 'Disable Encrypted Swap':
@@ -50,19 +70,12 @@ class people::wbs75::config::system_config (
         key         =>  'DisableEncryptedSwap',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>   Exec['Default Read VirtualMemory Plist'],
     }
 
-    file { 'Loginwindow Plist':
-        ensure  =>  file,
-        require =>  Property_list_key['Admin Host Info', 'Disable Auto Login Client'],
-        path    =>  "/Library/Preferences/com.apple.loginwindow.plist",
-        mode    =>  '0644',
+    exec { 'Default Read VirtualMemory Plist':
+        command     =>  "defaults read /Library/Preferences/com.apple.virtualMemory.plist",
+        path        =>  "/usr/bin/",
     }
 
-    file { 'VirtualMemory Plist':
-        ensure  =>  file,
-        require =>  Property_list_key['Disable Encrypted Swap'],
-        path    =>  "/Library/Preferences/com.apple.virtualMemory.plist",
-        mode    =>  '0644',
-    }
 }

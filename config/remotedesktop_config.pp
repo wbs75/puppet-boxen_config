@@ -9,9 +9,14 @@ class people::wbs75::config::remotedesktop_config (
     ######################
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+      owner => $my_username,
+      group => 'staff',
+      mode  => '0644',
+    }
+
+    exec { 'Default Read RemoteDesktop Plist':
+        command     => '/usr/bin/defaults read ~/Library/Preferences/com.apple.RemoteDesktop.plist',
+        path        =>  "/usr/bin/",
     }
 
     property_list_key { 'Directory Group Logins Enabled':
@@ -20,6 +25,7 @@ class people::wbs75::config::remotedesktop_config (
         key         =>  'DirectoryGroupLoginsEnabled',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Default Read RemoteDesktop Plist'],
     }
 
     property_list_key { 'Do Not Send System Keys':
@@ -28,6 +34,7 @@ class people::wbs75::config::remotedesktop_config (
         key         =>  'DoNotSendSystemKeys',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Default Read RemoteDesktop Plist'],
     }
 
     property_list_key { 'Show Short User Name':
@@ -36,12 +43,18 @@ class people::wbs75::config::remotedesktop_config (
         key         =>  'showShortUserName',
         value       =>  true,
         value_type  =>  'boolean',
+        notify      =>  Exec['Default Read RemoteDesktop Plist'],
     }
 
     file { 'RemoteDesktop Plist':
         ensure      =>  file,
-        require     =>  Property_list_key['Directory Group Logins Enabled', 'Do Not Send System Keys', 'Show Short User Name'],
+        require     =>  [
+                            Property_list_key['Directory Group Logins Enabled'],
+                            Property_list_key['Do Not Send System Keys'],
+                            Property_list_key['Show Short User Name'],
+                        ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.RemoteDesktop.plist",
         mode        =>  '0600',
+        notify      =>  Exec['Default Read RemoteDesktop Plist'],
     }
 }

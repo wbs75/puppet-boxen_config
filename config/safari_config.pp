@@ -9,9 +9,9 @@ class people::wbs75::config::safari_config (
     ##############
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
     }
 
     property_list_key { 'Backspace Key Navigation Enabled':
@@ -160,9 +160,34 @@ class people::wbs75::config::safari_config (
 
     file { 'Safari Plist':
         ensure      =>  file,
-        require     =>  Property_list_key['Backspace Key Navigation Enabled', 'Downloads Clearing Policy', 'History Age In Days Limit', 'Home Page', 'Local File Restrictions Enabled', 'DNS Prefetching Enabled', 'Include Toolbar Redesign', 'Disable Top Sites', 'Enable Form Modification On Close', 'Disable Animated Images', 'Disable Animated Image Looping', 'Disable CoverFlow View In Bookmarks View', 'Use Encoding Detector', 'Include Fancy URL Completion List', 'Include Google Suggestions', 'Grammar Checking Enabled', 'Continuous Spell Checking Enabled', 'Disable Print Backgrounds'],
+        require     =>  [
+                            Property_list_key['Backspace Key Navigation Enabled'],
+                            Property_list_key['Downloads Clearing Policy'],
+                            Property_list_key['History Age In Days Limit'],
+                            Property_list_key['Home Page'],
+                            Property_list_key['Local File Restrictions Enabled'],
+                            Property_list_key['DNS Prefetching Enabled'],
+                            Property_list_key['Include Toolbar Redesign'],
+                            Property_list_key['Disable Top Sites'],
+                            Property_list_key['Enable Form Modification On Close'],
+                            Property_list_key['Disable Animated Images'],
+                            Property_list_key['Disable Animated Image Looping'],
+                            Property_list_key['Disable CoverFlow View In Bookmarks View'],
+                            Property_list_key['Use Encoding Detector'],
+                            Property_list_key['Include Fancy URL Completion List'],
+                            Property_list_key['Include Google Suggestions'],
+                            Property_list_key['Grammar Checking Enabled'],
+                            Property_list_key['Continuous Spell Checking Enabled'],
+                            Property_list_key['Disable Print Backgrounds'],
+                        ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.Safari.plist",
         mode        =>  '0600',
+        notify      =>  Exec['Defaults Read Safari Plist'],
+    }
+
+    exec { 'Defaults Read Safari Plist':
+        command     => "defaults read ${my_homedir}/Library/Preferences/com.apple.Safari.plist",
+        path        =>  "/usr/bin/",
     }
 
 }

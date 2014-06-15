@@ -9,9 +9,9 @@ class people::wbs75::config::terminal_config (
     ###################
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+      owner => $my_username,
+      group => 'admin',
+      mode  => '0644',
     }
 
     property_list_key { 'Default Window Settings':
@@ -56,9 +56,21 @@ class people::wbs75::config::terminal_config (
 
     file { 'Terminal Plist':
         ensure      => file,
-        require     => Property_list_key['Default Window Settings', 'Default Profiles Version', 'Secure Keyboard Entry', 'Shell', 'Startup Window Settings'],
+        require     =>  [
+                            Property_list_key['Default Window Settings'],
+                            Property_list_key['Default Profiles Version'],
+                            Property_list_key['Secure Keyboard Entry'],
+                            Property_list_key['Shell'],
+                            Property_list_key['Startup Window Settings'],
+                        ],
         path        => "${my_homedir}/Library/Preferences/com.apple.terminal.plist",
         mode        => '0600',
+        notify      =>   Exec['Defaults Read Terminal Plist'],
+    }
+
+    exec { 'Defaults Read Terminal Plist':
+        command     =>  "defaults read ${my_homedir}/Library/Preferences/com.apple.terminal.plist",
+        path        =>  "/usr/bin/",
     }
 
 }

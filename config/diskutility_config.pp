@@ -9,9 +9,9 @@ class people::wbs75::config::diskutility_config (
     ################
 
     File {
-        owner   =>  $my_username,
-        group   =>  'staff',
-        mode    =>  '0644',
+        owner => $my_username,
+        group => 'staff',
+        mode  => '0644',
     }
 
     property_list_key { 'Show All Disk Formats':
@@ -79,10 +79,25 @@ class people::wbs75::config::diskutility_config (
     }
 
     file { 'DiskUtility Plist':
-        ensure      =>  file,
-        require     =>  Property_list_key['Show All Disk Formats', 'Allows Disk Images As RAIDs', 'Add Debug Menu', 'Restore Skip Verifification', 'Show Details In FirstAid', 'Show All Partitions', 'Show Extra Preferences', 'Show all Debug Messages'],
+        ensure  =>  file,
+        require =>  [
+                        Property_list_key['Show All Disk Formats'],
+                        Property_list_key['Allows Disk Images As RAIDs'],
+                        Property_list_key['Add Debug Menu'],
+                        Property_list_key['Restore Skip Verifification'],
+                        Property_list_key['Show Details In FirstAid'],
+                        Property_list_key['Show All Partitions'],
+                        Property_list_key['Show Extra Preferences'],
+                        Property_list_key['Show all Debug Messages'],
+                    ],
         path        =>  "${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
         mode        =>  '0600',
+        notify      =>  Exec['Defaults Read DiskUtility Plist'],
+    }
+
+    exec { 'Defaults Read DiskUtility Plist':
+        command     =>  "defaults read ${my_homedir}/Library/Preferences/com.apple.DiskUtility.plist",
+        path        =>  "/usr/bin/",
     }
 
 }
