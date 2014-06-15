@@ -1,3 +1,0 @@
-Test Config for Boxen
-=====================
-
